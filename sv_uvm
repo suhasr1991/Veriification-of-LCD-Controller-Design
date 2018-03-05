@@ -1,0 +1,29 @@
+#!/usr/bin/csh
+
+source /apps/set_license
+
+setenv VCS_HOME /apps/synopsys/VCSMX
+source ${VCS_HOME}/bin/environ.csh
+setenv UVM_HOME /home/morris/uvm-1.2
+echo ${UVM_HOME}
+vcs -sverilog -timescale=1ns/1ns +acc +vpi +define+UVM_OBJECT_MUST_HAVE_CONSTRUCTOR +incdir+${UVM_HOME}/src ${UVM_HOME}/src/uvm.sv ${UVM_HOME}/src/dpi/uvm_dpi.cc -CFLAGS -DVCS $argv
+if ($status != 0) exit $status
+ 
+ ./simv +272test=t0.txt | tee simres.txt
+  ./simv +272test=t1.txt | tee -a simres.txt
+  ./simv +272test=t2.txt | tee -a simres.txt
+  ./simv +272test=t3.txt | tee -a simres.txt
+  ./simv +272test=t4.txt | tee -a simres.txt
+  ./simv +272test=t5.txt | tee -a simres.txt
+  ./simv +272test=t6.txt | tee -a simres.txt
+  ./simv +272test=t7.txt | tee -a simres.txt
+  ./simv +272test=t8.txt | tee -a simres.txt
+  ./simv +272test=t9.txt | tee -a simres.txt
+  ./simv +272test=t10.txt | tee -a simres.txt
+  ./simv +272test=t11.txt | tee -a simres.txt
+  ./simv +272test=t12.txt | tee -a simres.txt
+  ./simv +272test=t13.txt | tee -a simres.txt
+  ./simv +272test=t14.txt | tee -a simres.txt
+  ./simv +272test=t15.txt | tee -a simres.txt
+  
+# grep -i error simres.txt

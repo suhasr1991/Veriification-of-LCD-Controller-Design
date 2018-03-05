@@ -1,0 +1,11 @@
+#!/usr/bin/csh
+
+source /apps/set_license
+
+setenv VCS_HOME /apps/synopsys/VCSMX_NEW
+source ${VCS_HOME}/bin/environ.csh
+which vcs
+vcs +systemverilogext+.sv -sverilog -assert svaext -lca -cm line+cond+fsm -cm_cond allops+for+full -cm_count $argv
+if ($status != 0) exit $status
+./simv -cm line+cond+fsm -cm_count
+
